@@ -11,14 +11,12 @@
             "id": "2914dbeb7a9a93d3",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "Academics/Daily_Papers_Intake.md",
-                "mode": "preview",
-                "source": false
+                "file": "assets/gifs/burpees.gif"
               },
-              "icon": "lucide-file",
-              "title": "Daily_Papers_Intake"
+              "icon": "lucide-image",
+              "title": "burpees"
             }
           }
         ]
@@ -183,6 +181,7 @@
   },
   "active": "cad4fc01ddae72d0",
   "lastOpenFiles": [
+    "Academics/Daily_Papers_Intake.md",
     "obs",
     "Academics/Probability_Decks.md",
     "Academics/Academics.md",
@@ -193,7 +192,6 @@
     "Cockpit.md",
     "Academics/Recursion_Decks.md",
     "Fitness/Fitness.md",
-    "Academics/Daily_Papers_Intake.md",
     "assets/gifs/plank_shoulder_taps.gif",
     "Update_Pages/Update_System.md",
     "Indestructible_Systems/Continuity_Rules.md",
