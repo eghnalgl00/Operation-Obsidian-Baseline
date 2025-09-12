@@ -1,0 +1,6 @@
+# ✅ First Flight (13 Sep)
+
+1. Open [[Cockpit]]
+2. Tick tasks in [[Daily_Logs/2025-09-13]]
+3. Trigger [[Update_System]] if you want problem/workout packs
+4. Git: Commit + Push

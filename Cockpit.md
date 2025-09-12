@@ -1,22 +1,15 @@
-# 🛰️ Operation Obsidian — Cockpit (Enriched)
+# 🛰️ Operation Obsidian — Cockpit (t=0, 2025-09-13)
 
-## Schedule_Panel (Updated 2025-09-11)
-| Date       | Slot    | Notes                   | Continuity |
-| ---------- | ------- | ----------------------- | ---------- |
-| 2025-09-11 | Morning | Recursion P6 + 2 papers | ⬜          |
-| 2025-09-11 | Midday  | Program X — HIIT (20m)  | ⬜          |
-| 2025-09-11 | Evening | LISS + Novelty reset    | ⬜          |
+Welcome, Egehancım. This is the cockpit for Sat, 13 Sep 2025.
 
----
-### 🎛️ Controls
-- ▶️ [[Update_Pages/Update_System|Update System]]  
-- ✅ [[Indestructible_Systems/XP_Tracker_and_Heatmaps|Open XP Tracker]]  
-- ⚡ [[Indestructible_Systems/God_Mode_Toggles|God Mode Toggle]]  
-- 🎒 [[Daily_Logs/Daily_Log_2025-09-11|Open Today’s Log]]
+## 🎛️ Controls
+- [[Update_System]]
+- [[First_Flight_Baseline]]
+- [[Daily_Logs/2025-09-13]]
 
-### Pillars
-- 📚 [[Academics/Academics|Academics]]
-- 🏋️ [[Fitness/Fitness|Fitness]]
-- 😴 [[Recovery/Recovery|Recovery]]
-- ⚡ [[Indestructible_Systems/Indestructible_Systems|Indestructible Systems]]
-- 🌍 [[Externals/Externals|Externals]]
+## 📚 Pillars
+- [[Academics/README]]
+- [[Fitness/README]]
+- [[Recovery/README]]
+- [[Externals/README]]
+- [[Indestructible_Systems/README]]
