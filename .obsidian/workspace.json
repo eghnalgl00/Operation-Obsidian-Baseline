@@ -150,8 +150,19 @@
               "icon": "lucide-list",
               "title": "Outline of Weeks_1_3_GIF_Sessions"
             }
+          },
+          {
+            "id": "387caeb22e952a92",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -170,7 +181,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "2914dbeb7a9a93d3",
+  "active": "cad4fc01ddae72d0",
   "lastOpenFiles": [
     "obs",
     "Academics/Probability_Decks.md",
