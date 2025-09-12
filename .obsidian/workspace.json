@@ -11,12 +11,14 @@
             "id": "2914dbeb7a9a93d3",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "assets/gifs/burpees.gif"
+                "file": "Daily_Logs/2025-09-13.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "burpees"
+              "icon": "lucide-file",
+              "title": "2025-09-13"
             }
           }
         ]
@@ -179,8 +181,17 @@
       "bases:Create new base": false
     }
   },
-  "active": "cad4fc01ddae72d0",
+  "active": "2914dbeb7a9a93d3",
   "lastOpenFiles": [
+    "Externals/README.md",
+    "Update_System.md",
+    "Week_Schedule.md",
+    "First_Flight_Baseline.md",
+    "Indestructible_Systems/README.md",
+    "Fitness/README.md",
+    "Daily_Logs/2025-09-13.md",
+    "Academics/README.md",
+    "assets/gifs/burpees.gif",
     "Academics/Daily_Papers_Intake.md",
     "obs",
     "Academics/Probability_Decks.md",
@@ -198,25 +209,17 @@
     "Indestructible_Systems/God_Mode_Toggles.md",
     "Indestructible_Systems/Indestructible_Systems.md",
     "Indestructible_Systems/XP_Tracker_and_Heatmaps.md",
-    "assets/gifs/burpees.gif",
     "Fitness/Weeks_1_3_GIF_Sessions.md",
     "Fitness/Weeks_1_2_Diet_Reset.md",
     "Fitness/Macros_and_Tracking.md",
     "Fitness/LISS_Booster.md",
-    "Fitness/HIIT_Blocks.md",
     "assets/gifs/dead_bug.gif",
-    "Week_Schedule.md",
-    "Daily_Logs/Daily_Log_2025-09-11.md",
     "assets/gifs/goblet_squat.gif",
     "assets/gifs/db_thrusters.gif",
     "assets/gifs/db_row.gif",
     "assets/gifs/pushup.gif",
-    "Externals/Competitions_Radar.md",
-    "Recovery/Novelty_Bank.md",
-    "Recovery/Ninety_Min_Anchor_Resets.md",
     "assets/gifs/jump_squats.gif",
     "assets/gifs",
-    "assets",
-    "Academics/Legacy_Impact_Projects.md"
+    "assets"
   ]
 }
