@@ -1,0 +1,213 @@
+{
+  "main": {
+    "id": "dbbcd96248cb12ba",
+    "type": "split",
+    "children": [
+      {
+        "id": "7995051eb2024f50",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2914dbeb7a9a93d3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Academics/Daily_Papers_Intake.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Daily_Papers_Intake"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "49cb5e0784f9b474",
+    "type": "split",
+    "children": [
+      {
+        "id": "86326828b19f75c6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cad4fc01ddae72d0",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "3c06c3322b750b91",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "ae063af7f7314f61",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d9fe11e79e5b0ec9",
+    "type": "split",
+    "children": [
+      {
+        "id": "6201eb42eb04f0d7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "654dbe8dc0388fa5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Fitness/Weeks_1_3_GIF_Sessions.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Weeks_1_3_GIF_Sessions"
+            }
+          },
+          {
+            "id": "7ed73c4983c3f125",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Fitness/Weeks_1_3_GIF_Sessions.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Weeks_1_3_GIF_Sessions"
+            }
+          },
+          {
+            "id": "320955c6e12e367c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "6377085d308f7db8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Fitness/Weeks_1_3_GIF_Sessions.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Weeks_1_3_GIF_Sessions"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "obsidian-git:Open Git source control": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "2914dbeb7a9a93d3",
+  "lastOpenFiles": [
+    "obs",
+    "Academics/Probability_Decks.md",
+    "Academics/Academics.md",
+    "Academics/AI_Driven_Solutions_Explainers.md",
+    "Untitled.md",
+    "Untitled 1.md",
+    "Untitled",
+    "Cockpit.md",
+    "Academics/Recursion_Decks.md",
+    "Fitness/Fitness.md",
+    "Academics/Daily_Papers_Intake.md",
+    "assets/gifs/plank_shoulder_taps.gif",
+    "Update_Pages/Update_System.md",
+    "Indestructible_Systems/Continuity_Rules.md",
+    "Indestructible_Systems/God_Mode_Toggles.md",
+    "Indestructible_Systems/Indestructible_Systems.md",
+    "Indestructible_Systems/XP_Tracker_and_Heatmaps.md",
+    "assets/gifs/burpees.gif",
+    "Fitness/Weeks_1_3_GIF_Sessions.md",
+    "Fitness/Weeks_1_2_Diet_Reset.md",
+    "Fitness/Macros_and_Tracking.md",
+    "Fitness/LISS_Booster.md",
+    "Fitness/HIIT_Blocks.md",
+    "assets/gifs/dead_bug.gif",
+    "Week_Schedule.md",
+    "Daily_Logs/Daily_Log_2025-09-11.md",
+    "assets/gifs/goblet_squat.gif",
+    "assets/gifs/db_thrusters.gif",
+    "assets/gifs/db_row.gif",
+    "assets/gifs/pushup.gif",
+    "Externals/Competitions_Radar.md",
+    "Recovery/Novelty_Bank.md",
+    "Recovery/Ninety_Min_Anchor_Resets.md",
+    "assets/gifs/jump_squats.gif",
+    "assets/gifs",
+    "assets",
+    "Academics/Legacy_Impact_Projects.md"
+  ]
+}
