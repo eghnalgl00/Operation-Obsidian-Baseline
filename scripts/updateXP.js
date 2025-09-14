@@ -1,81 +1,104 @@
-// .obsidian/scripts/updateXP.js
-// Scans today's Daily Log, updates numbers in YAML frontmatter (nodes/layers/connections)
-// based on checked tasks (very lightweight heuristic to keep cockpit live).
-
-async function updateXP(tp) {
+// updateXP.js
+// Exported as a direct function so Templater can call: <%* await tp.user.updateXP() %>
+// Writes native YAML booleans + per-slot completion flags; lightweight counts.
+module.exports = async function(tp) {
   try {
-    const vault = app.vault;
-    const adapter = vault.adapter;
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const dd = String(now.getDate()).padStart(2, '0');
-    const dateStr = `${yyyy}-${mm}-${dd}`;
-    const filePath = `Daily_Logs/${dateStr}.md`;
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const file = `Daily_Logs/${yyyy}-${mm}-${dd}.md`;
 
-    if (!(await adapter.exists(filePath))) {
-      new Notice("No daily log yet. Creating one first...");
-      // Try to create it
-      if (tp && tp.user && typeof tp.user.dailyLog === "function") {
-        await tp.user.dailyLog(tp);
-      }
+    const tfile = app.vault.getAbstractFileByPath(file);
+    if (!tfile) { new Notice('XP: today log not found'); return; }
+
+    let data = await app.vault.read(tfile);
+
+    // Parse schedule checkboxes
+    const scheduleBlock = data.split('## Schedule')[1]?.split('##')[0] || '';
+    const doneMorning = /\- \[(x|X)\].*Morning/.test(scheduleBlock);
+    const doneMidday  = /\- \[(x|X)\].*Midday/.test(scheduleBlock);
+    const doneEvening = /\- \[(x|X)\].*Evening/.test(scheduleBlock);
+
+    // Light pillar counts (checked items per pillar section)
+    function countChecked(sectionName) {
+      const sect = data.split(`## ${sectionName}`)[1]?.split('##')[0] || '';
+      const matches = sect.match(/\- \[(x|X)\]/g);
+      return matches ? matches.length : 0;
+    }
+    const A = countChecked('Academics');
+    const F = countChecked('Fitness');
+    const R = countChecked('Recovery');
+
+    // ---- YAML update helpers ----
+    const fmMatch = data.match(/^---\n([\s\S]*?)\n---/);
+    const fmText = fmMatch ? fmMatch[1] : '';
+    const body = fmMatch ? data.slice(fmMatch[0].length) : data;
+
+    // Load YAML (simple)
+    function parseYaml(text) {
+      const obj = { nodes:{academics:0,fitness:0,recovery:0}, layers:{academics:0,fitness:0,recovery:0}, connections:{academics:0,fitness:0,recovery:0}, done:{morning:false,midday:false,evening:false} };
+      text.split('\n').forEach(line => {
+        const m = line.match(/^(\w+):\s*(.*)$/);
+        if (m) {
+          const key = m[1]; const val = m[2];
+          if (key === 'date' || key === 'pillar') obj[key] = val;
+        }
+        const nested = line.match(/^\s{2}(\w+):\s*(.*)$/);
+        if (nested) {
+          const k = nested[1]; const v = nested[2];
+          const parentLine = (text.split('\n').slice(0, text.split('\n').indexOf(line)).reverse().find(l=>/^\w+:$/.test(l))||'').trim().replace(':','');
+          if (['nodes','layers','connections','done'].includes(parentLine)) {
+            if (parentLine==='done') obj.done[k] = v.trim()==='true';
+            else {
+              const n = parseInt(v.trim(),10);
+              if (!isNaN(n)) obj[parentLine][k]=n;
+            }
+          }
+        }
+      });
+      return obj;
     }
 
-    const file = await vault.getAbstractFileByPath(filePath);
-    if (!file) {
-      new Notice("updateXP: couldn't load today's file"); 
-      return;
+    function toYaml(obj){
+      return [
+        '---',
+        `date: ${obj.date || ''}`.trim(),
+        `pillar: ${obj.pillar || 'daily'}`.trim(),
+        'nodes:',
+        `  academics: ${obj.nodes.academics}`,
+        `  fitness: ${obj.nodes.fitness}`,
+        `  recovery: ${obj.nodes.recovery}`,
+        'layers:',
+        `  academics: ${obj.layers.academics}`,
+        `  fitness: ${obj.layers.fitness}`,
+        `  recovery: ${obj.layers.recovery}`,
+        'connections:',
+        `  academics: ${obj.connections.academics}`,
+        `  fitness: ${obj.connections.fitness}`,
+        `  recovery: ${obj.connections.recovery}`,
+        'done:',
+        `  morning: ${obj.done.morning}`,
+        `  midday: ${obj.done.midday}`,
+        `  evening: ${obj.done.evening}`,
+        '---\n'
+      ].join('\n');
     }
 
-    let content = await vault.read(file);
+    const meta = parseYaml(fmText);
+    meta.done.morning = doneMorning;
+    meta.done.midday  = doneMidday;
+    meta.done.evening = doneEvening;
+    // Use checked-counts as "connections" — harmless & visible in cockpit
+    meta.connections.academics = A;
+    meta.connections.fitness   = F;
+    meta.connections.recovery  = R;
 
-    // Parse YAML frontmatter (simple regex)
-    const yamlMatch = content.match(/^---\n([\s\S]*?)\n---/);
-    let yaml = yamlMatch ? yamlMatch[1] : "";
-    let body = yamlMatch ? content.slice(yamlMatch[0].length) : content;
-
-    function getSectionCount(sectionHeader) {
-      const sectionRegex = new RegExp(`^##\\s+${sectionHeader}[\\s\\S]*?(?=^##\\s+|\\Z)`, "m");
-      const s = body.match(sectionRegex);
-      if (!s) return 0;
-      const checks = s[0].match(/- \[x\]/gi);
-      return checks ? checks.length : 0;
-    }
-
-    const A = getSectionCount("Academics");
-    const F = getSectionCount("Fitness");
-    const R = getSectionCount("Recovery");
-
-    // Update simple counts in YAML (nodes/layers/connections)
-    function setField(blockName, a, f, r) {
-      const blockRegex = new RegExp(`${blockName}:\\n([\\s\\S]*?)(?=\\n[a-zA-Z_]+:|\\Z)`);
-      const newBlock = `${blockName}:\n  academics: ${a}\n  fitness: ${f}\n  recovery: ${r}`;
-      if (yaml.match(blockRegex)) {
-        yaml = yaml.replace(blockRegex, newBlock);
-      } else {
-        yaml += `\n${newBlock}\n`;
-      }
-    }
-
-    setField("nodes", A, F, R);
-    setField("layers", Math.max(0, A-1), Math.max(0, F-1), Math.max(0, R-1));
-    setField("connections", A>0?1:0, F>0?1:0, R>0?1:0);
-
-    // Done flags by schedule checkboxes
-    function scheduleDone(which) {
-      const re = new RegExp(`^- \\[x\\].*${which}`, "mi");
-      return re.test(body);
-    }
-    const doneBlock = `done:\n  morning: ${scheduleDone("Morning")}\n  midday: ${scheduleDone("Midday")}\n  evening: ${scheduleDone("Evening")}`;
-    yaml = yaml.replace(/done:\n([\s\S]*?)(?=\n[a-zA-Z_]+:|\Z)/, doneBlock);
-
-    const newContent = `---\n${yaml.trim()}\n---\n${body}`;
-    await vault.modify(file, newContent);
-    new Notice("XP updated for today");
+    const newData = toYaml(meta) + body;
+    await app.vault.modify(tfile, newData);
+    new Notice('XP updated');
   } catch (e) {
-    console.error("updateXP error:", e);
-    new Notice("updateXP error — check console");
+    console.error('updateXP error:', e);
+    new Notice('XP update error — check console');
   }
-}
-
-module.exports = { updateXP };
+};

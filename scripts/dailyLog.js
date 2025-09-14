@@ -1,46 +1,43 @@
-// .obsidian/scripts/dailyLog.js
-// Creates today's Daily_Logs/YYYY-MM-DD.md with baseline content if missing.
-async function dailyLog(tp) {
+// dailyLog.js
+// Exported as a direct function so Templater can call: <%* await tp.user.dailyLog() %>
+module.exports = async function(tp) {
   try {
-    const vault = app.vault;
-    const adapter = vault.adapter;
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const dd = String(now.getDate()).padStart(2, '0');
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
     const dateStr = `${yyyy}-${mm}-${dd}`;
+    const filename = `Daily_Logs/${dateStr}.md`;
 
-    const dir = "Daily_Logs";
-    const filename = `${dir}/${dateStr}.md`;
+    // If already exists, do nothing
+    const exists = app.vault.getAbstractFileByPath(filename);
+    if (exists) { new Notice(`Daily log exists: ${dateStr}`); return; }
 
-    // Ensure folder exists
-    if (!(await adapter.exists(dir))) {
-      await vault.createFolder(dir);
-    }
+    const frontmatter = [
+      '---',
+      `date: ${dateStr}`,
+      'pillar: daily',
+      'nodes:',
+      '  academics: 0',
+      '  fitness: 0',
+      '  recovery: 0',
+      'layers:',
+      '  academics: 0',
+      '  fitness: 0',
+      '  recovery: 0',
+      'connections:',
+      '  academics: 0',
+      '  fitness: 0',
+      '  recovery: 0',
+      'done:',
+      '  morning: false',
+      '  midday: false',
+      '  evening: false',
+      '---',
+      ''
+    ].join('\n');
 
-    if (!(await adapter.exists(filename))) {
-      const content = `---
-date: ${dateStr}
-pillar: daily
-nodes:
-  academics: 0
-  fitness: 0
-  recovery: 0
-layers:
-  academics: 0
-  fitness: 0
-  recovery: 0
-connections:
-  academics: 0
-  fitness: 0
-  recovery: 0
-done:
-  morning: false
-  midday: false
-  evening: false
----
-
-# Daily Log — ${dateStr}
+    const body = `# Daily Log — ${dateStr}
 
 ## Schedule
 - [ ] Morning → Academics depth block (Recursion/Probability drills)
@@ -69,18 +66,11 @@ done:
 ## Creativity
 - [ ] Log one mini‑project idea (2 lines max)
 `;
-      await vault.create(filename, content);
-      new Notice(`Daily log created: ${filename}`);
-    } else {
-      // Optionally open today's note if it already exists
-      // const leaf = app.workspace.getLeaf(true);
-      // await leaf.openFile(await vault.getAbstractFileByPath(filename));
-      console.log("Daily log already exists:", filename);
-    }
-  } catch (e) {
-    console.error("dailyLog error:", e);
-    new Notice("dailyLog error — check console");
-  }
-}
 
-module.exports = { dailyLog };
+    await app.vault.create(filename, frontmatter + body);
+    new Notice(`Created daily log: ${dateStr}`);
+  } catch (e) {
+    console.error('dailyLog error:', e);
+    new Notice('DailyLog error — check console');
+  }
+};
