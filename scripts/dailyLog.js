@@ -1,20 +1,23 @@
 // dailyLog.js
-function dailyLog() {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    const dateStr = `${yyyy}-${mm}-${dd}`;
+// Templater user script: tp.user.dailyLog()
+// Creates Daily_Logs/YYYY-MM-DD.md if it doesn't exist.
 
-    const fs = require('fs');
-    const path = require('path');
+async function dailyLog(tp) {
+  try {
+    const today = window.moment().format("YYYY-MM-DD");
+    const folder = "Daily_Logs";
+    const filename = `${folder}/${today}.md`;
 
-    const logDir = path.join(app.vault.adapter.basePath, 'Daily_Logs');
-    const logFile = path.join(logDir, `${dateStr}.md`);
+    if (!(await app.vault.adapter.exists(folder))) {
+      await app.vault.createFolder(folder);
+    }
+    if (await app.vault.adapter.exists(filename)) {
+      console.log(`Daily log already exists: ${filename}`);
+      return;
+    }
 
-    if (!fs.existsSync(logFile)) {
-        const content = `---
-date: ${dateStr}
+    const content = `---
+date: ${"${today}"}
 pillar: daily
 nodes:
   academics: 0
@@ -34,7 +37,7 @@ done:
   evening: false
 ---
 
-# Daily Log — ${dateStr}
+# Daily Log — ${"${today}"}
 
 ## Schedule
 - [ ] Morning → Academics depth block (Recursion/Probability drills)
@@ -63,11 +66,16 @@ done:
 ## Creativity
 - [ ] Log one mini-project idea (2 lines max)
 `;
-        fs.writeFileSync(logFile, content);
-        console.log(`Created daily log: ${logFile}`);
-    } else {
-        console.log("Daily log already exists:", logFile);
-    }
+
+    const tfile = await app.vault.create(filename, content);
+    // Uncomment next line if you want it to auto-open:
+    // await app.workspace.getLeaf(true).openFile(tfile);
+    new Notice(`Daily log created: ${filename}`);
+    console.log(`Created daily log: ${filename}`);
+  } catch (e) {
+    console.error("dailyLog error:", e);
+    new Notice("dailyLog error — check console");
+  }
 }
 
-module.exports = dailyLog;
+module.exports = { dailyLog };

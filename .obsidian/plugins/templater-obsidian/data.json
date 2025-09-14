@@ -32,7 +32,6 @@
     ""
   ],
   "startup_templates": [
-    "<%* tp.user.dailyLog() %>",
     "<%* await tp.user.dailyLog() %>"
   ],
   "intellisense_render": 1
