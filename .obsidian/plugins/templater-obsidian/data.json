@@ -32,7 +32,7 @@
     ""
   ],
   "startup_templates": [
-    "<%* tp.user.dailyLog() %>"
+    "scripts/Startup_Auto_Daily_Log.md"
   ],
   "intellisense_render": 1
 }
