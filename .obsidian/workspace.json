@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Cockpit.md",
+                "file": "Daily_Logs/2025-09-14.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Cockpit"
+              "title": "2025-09-14"
             }
           }
         ]
@@ -184,6 +184,7 @@
   },
   "active": "2914dbeb7a9a93d3",
   "lastOpenFiles": [
+    "Cockpit.md",
     "scripts/dailyLog.js",
     "scripts",
     "untitled folder",
@@ -196,7 +197,6 @@
     "Update_System.md",
     "Week_Schedule.md",
     "Academics/Academics_Bank.md",
-    "Cockpit.md",
     "Daily_Logs/2025-09-14.md",
     "Update_Pages/Update_System.md",
     "Indestructible_Systems/README.md",
