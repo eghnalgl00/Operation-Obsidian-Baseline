@@ -29,7 +29,7 @@
   "syntax_highlighting": true,
   "syntax_highlighting_mobile": false,
   "enabled_templates_hotkeys": [
-    ""
+    "Templates/Command_Update_XP.md"
   ],
   "startup_templates": [
     "Templates/Startup_Auto_Daily_Log.md"
