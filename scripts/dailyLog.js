@@ -1,64 +1,14 @@
-/**
- * Operation Obsidian — Auto Daily Log
- * Place this file in: .obsidian/scripts/dailyLog.js
- * Run via Templater: <%* await tp.user.dailyLog() %>
- */
-async function dailyLog() {
-  // --- Config (edit if you want) ---
-  const AUTO_OPEN_AFTER_CREATE = false; // set true to auto-open today's note after creation
-  const LOG_FOLDER = "Daily_Logs";
+// dailyLog.js  (FINAL)
+// Exports a function tp can call: <%* await tp.user.dailyLog(tp) %>
+// Creates Daily_Logs/YYYY-MM-DD.md if missing.
 
-  // --- Date strings ---
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const dd = String(today.getDate()).padStart(2, '0');
-  const dateStr = `${yyyy}-${mm}-${dd}`;
+async function dailyLog(tp) {
+  try {
+    const today = window.moment().format("YYYY-MM-DD");
+    const filename = `Daily_Logs/${today}.md`;
 
-  const { vault, fileManager, workspace, metadataCache } = app;
-
-  // Ensure folder exists
-  async function ensureFolder(folderPath) {
-    try {
-      const folder = metadataCache.getFirstLinkpathDest(folderPath, "");
-      if (!folder) {
-        await vault.createFolder(folderPath);
-      }
-    } catch (e) {
-      // Folder may already exist; ignore "already exists" errors
-      if (!String(e).includes("already exists")) throw e;
-    }
-  }
-
-  const folder = LOG_FOLDER;
-  const filename = `${folder}/${dateStr}.md`;
-
-  // YAML frontmatter for Dataview/automation
-  const yaml = [
-    "---",
-    `date: ${dateStr}`,
-    "pillar: daily",
-    "nodes:",
-    "  academics: 0",
-    "  fitness: 0",
-    "  recovery: 0",
-    "layers:",
-    "  academics: 0",
-    "  fitness: 0",
-    "  recovery: 0",
-    "connections:",
-    "  academics: 0",
-    "  fitness: 0",
-    "  recovery: 0",
-    "done:",
-    "  morning: false",
-    "  midday: false",
-    "  evening: false",
-    "---",
-    ""
-  ].join("\n");
-
-  const body = `# Daily Log — ${dateStr}
+    // Full note content (no YAML required; Dataview can query by path/date)
+    const content = `# Daily Log — ${today}
 
 ## Schedule
 - [ ] Morning → Academics depth block (Recursion/Probability drills)
@@ -88,29 +38,29 @@ async function dailyLog() {
 - [ ] Log one mini‑project idea (2 lines max)
 `;
 
-  const content = yaml + body;
-
-  try {
-    await ensureFolder(folder);
-
-    // If file already exists, do nothing (idempotent)
-    const existing = metadataCache.getFirstLinkpathDest(filename, "");
-    if (existing) {
-      console.log(`[dailyLog] Already exists: ${filename}`);
-      if (AUTO_OPEN_AFTER_CREATE) await workspace.getLeaf(true).openFile(existing);
-      return "exists";
+    // Ensure folder exists
+    const folder = "Daily_Logs";
+    if (!app.vault.getAbstractFileByPath(folder)) {
+      await app.vault.createFolder(folder);
     }
 
-    const tfile = await vault.create(filename, content);
-    new Notice(`Daily log created: ${filename}`);
-    console.log(`[dailyLog] Created: ${filename}`);
-    if (AUTO_OPEN_AFTER_CREATE) await workspace.getLeaf(true).openFile(tfile);
-    return "created";
+    // Create only if it doesn't exist (idempotent)
+    if (!app.vault.getAbstractFileByPath(filename)) {
+      const tfile = await app.vault.create(filename, content);
+      // Auto-open the new file:
+      const leaf = app.workspace.getLeaf(true);
+      await leaf.openFile(tfile);
+      new Notice(`Daily log created: ${filename}`);
+    } else {
+      console.log("Daily log exists:", filename);
+    }
+
+    return "";
   } catch (e) {
-    console.error("[dailyLog] error:", e);
-    new Notice("dailyLog error — see console");
-    return "error";
+    console.error("dailyLog error:", e);
+    new Notice("dailyLog error — check console");
+    return "";
   }
 }
 
-module.exports = { dailyLog };
+module.exports = dailyLog;
