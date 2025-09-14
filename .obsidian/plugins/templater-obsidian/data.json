@@ -32,7 +32,8 @@
     "Templates/Command_Update_XP.md"
   ],
   "startup_templates": [
-    "Templates/Startup_Auto_Daily_Log.md"
+    "Templates/Startup_Auto_Daily_Log.md",
+    "Templates/Startup_Auto_XP.md"
   ],
   "intellisense_render": 1
 }

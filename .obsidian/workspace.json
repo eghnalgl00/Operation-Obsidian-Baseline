@@ -184,6 +184,7 @@
   },
   "active": "2914dbeb7a9a93d3",
   "lastOpenFiles": [
+    "scripts/autoXP.js",
     "Templates/Startup_Auto_XP.md",
     "READ_ME_FIRST.md",
     "Update_System.md",
@@ -221,7 +222,6 @@
     "Externals/README.md",
     "Fitness/README.md",
     "Academics/README.md",
-    "Academics/Daily_Papers_Intake.md",
     "assets/gifs/plank_shoulder_taps.gif",
     "assets/gifs/dead_bug.gif",
     "assets/gifs/goblet_squat.gif",

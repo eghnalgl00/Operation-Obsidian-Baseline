@@ -1,1 +1,1 @@
-<%* await tp.user.autoXP() %>
+<%* await tp.user.updateXP() %>
