@@ -6,7 +6,7 @@ timezone: Europe/Istanbul
 ---
 
 ```dataviewjs
-const cfg = dv.current();
+const cfg = dv.current().file.frontmatter;
 const start = dv.date(cfg.elite_window?.start ?? "2025-09-22");
 const end   = dv.date(cfg.elite_window?.end   ?? "2025-10-10");
 const today = dv.date("today");
@@ -33,7 +33,6 @@ if (!start || !end) {
 
   dv.el("pre", `==============================\n${status}\n${windowLine}\n${opsLine}\n==============================`);
 }
-# End of dataviewjs block
 ```
 
 ### Live Panels
@@ -74,7 +73,7 @@ WHERE file.day.weekyear = date(today).weekyear AND file.day.week = date(today).w
 ```dataview
 TABLE file.day AS Day, done.morning, done.midday, done.evening
 FROM "Daily_Logs"
-WHERE file.day >= date(today).startOfWeek() AND file.day <= date(today).endOfWeek()
+WHERE file.day <= date(today) AND file.day >= date(today) - dur(6 days)
 SORT file.day ASC
 ```
 # Operation Obsidian Cockpit
