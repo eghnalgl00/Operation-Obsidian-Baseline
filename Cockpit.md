@@ -4,6 +4,8 @@ elite_window:
   end: 2025-10-10
 timezone: Europe/Istanbul
 ---
+
+```dataviewjs
 const cfg = dv.current();
 const start = dv.date(cfg.elite_window?.start ?? "2025-09-22");
 const end   = dv.date(cfg.elite_window?.end   ?? "2025-10-10");
@@ -31,6 +33,7 @@ if (!start || !end) {
 
   dv.el("pre", `==============================\n${status}\n${windowLine}\n${opsLine}\n==============================`);
 }
+```
 # Operation Obsidian Cockpit
 
 - [Academics](Academics/Academics_Bank.md)
