@@ -1,2 +1,2 @@
-# ⚡ Indestructible Systems — XP Tracker, Heatmaps, Toggles.
-Scaffolds ready.
+# ⚡ Indestructible Systems — XP Tracker, Heatmaps, God Mode.
+Scaffold ready.

@@ -1,15 +1,12 @@
-# 🛰️ Operation Obsidian — Cockpit (t=0, 2025-09-13)
+# Operation Obsidian Cockpit
 
-Welcome, Egehancım. This is the cockpit for Sat, 13 Sep 2025.
+- [Academics](Academics/Academics_Bank.md)
+- [Fitness](Fitness/Fitness_Bank.md)
+- [Recovery](Recovery/Recovery_Bank.md)
+- [Externals](Externals/Externals_Bank.md)
+- [Creativity](Creativity/Creativity_Bank.md)
 
-## 🎛️ Controls
-- [[Update_System]]
-- [[First_Flight_Baseline]]
-- [[Daily_Logs/2025-09-13]]
+---
 
-## 📚 Pillars
-- [[Academics/README]]
-- [[Fitness/README]]
-- [[Recovery/README]]
-- [[Externals/README]]
-- [[Indestructible_Systems/README]]
+## Today
+See [Daily Log](Daily_Logs/2025-09-14.md)
