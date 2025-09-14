@@ -1,6 +1,6 @@
 {
   "command_timeout": 5,
-  "templates_folder": "Operation_Obsidian_Templater_Pack/Templates",
+  "templates_folder": "scripts",
   "templates_pairs": [
     [
       "",
@@ -32,7 +32,7 @@
     ""
   ],
   "startup_templates": [
-    "scripts/Startup_Auto_Daily_Log.md"
+    ""
   ],
   "intellisense_render": 1
 }
