@@ -1,1 +1,1 @@
-<%* await tp.user.dailyLog() %>
+<%* await tp.user.dailyLog(tp) %>

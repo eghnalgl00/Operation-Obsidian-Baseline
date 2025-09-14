@@ -1,7 +1,46 @@
+// .obsidian/scripts/dailyLog.js
+// Creates today's Daily_Logs/YYYY-MM-DD.md with baseline content if missing.
 async function dailyLog(tp) {
-    const today = window.moment().format("YYYY-MM-DD");
+  try {
+    const vault = app.vault;
+    const adapter = vault.adapter;
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const dateStr = `${yyyy}-${mm}-${dd}`;
 
-    const content = `# Daily Log — ${today}
+    const dir = "Daily_Logs";
+    const filename = `${dir}/${dateStr}.md`;
+
+    // Ensure folder exists
+    if (!(await adapter.exists(dir))) {
+      await vault.createFolder(dir);
+    }
+
+    if (!(await adapter.exists(filename))) {
+      const content = `---
+date: ${dateStr}
+pillar: daily
+nodes:
+  academics: 0
+  fitness: 0
+  recovery: 0
+layers:
+  academics: 0
+  fitness: 0
+  recovery: 0
+connections:
+  academics: 0
+  fitness: 0
+  recovery: 0
+done:
+  morning: false
+  midday: false
+  evening: false
+---
+
+# Daily Log — ${dateStr}
 
 ## Schedule
 - [ ] Morning → Academics depth block (Recursion/Probability drills)
@@ -28,16 +67,20 @@ async function dailyLog(tp) {
 - Hackathons: shortlist 1 opportunity
 
 ## Creativity
-- [ ] Log one mini‑project idea (2 lines max)`;
-
-    try {
-        const filename = `Daily_Logs/${today}.md`;
-        const tfile = await app.vault.create(filename, content);
-        new Notice(`Daily log created: ${filename}`);
-        console.log(`Created daily log: ${filename}`);
-    } catch (e) {
-        console.error("dailyLog error:", e);
-        new Notice("dailyLog error — check console");
+- [ ] Log one mini‑project idea (2 lines max)
+`;
+      await vault.create(filename, content);
+      new Notice(`Daily log created: ${filename}`);
+    } else {
+      // Optionally open today's note if it already exists
+      // const leaf = app.workspace.getLeaf(true);
+      // await leaf.openFile(await vault.getAbstractFileByPath(filename));
+      console.log("Daily log already exists:", filename);
     }
+  } catch (e) {
+    console.error("dailyLog error:", e);
+    new Notice("dailyLog error — check console");
+  }
 }
+
 module.exports = { dailyLog };
