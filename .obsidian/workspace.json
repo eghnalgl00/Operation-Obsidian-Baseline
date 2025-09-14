@@ -178,11 +178,14 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "templater-obsidian:Templater": false
     }
   },
   "active": "2914dbeb7a9a93d3",
   "lastOpenFiles": [
+    "Templates",
+    "untitled folder",
     "Update_System.md",
     "Week_Schedule.md",
     "Academics/Academics_Bank.md",
@@ -213,7 +216,6 @@
     "assets/gifs/plank_shoulder_taps.gif",
     "Indestructible_Systems/Continuity_Rules.md",
     "Indestructible_Systems/God_Mode_Toggles.md",
-    "Indestructible_Systems/Indestructible_Systems.md",
     "assets/gifs/dead_bug.gif",
     "assets/gifs/goblet_squat.gif",
     "assets/gifs/db_thrusters.gif",
