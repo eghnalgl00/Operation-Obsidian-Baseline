@@ -29,11 +29,14 @@
   "syntax_highlighting": true,
   "syntax_highlighting_mobile": false,
   "enabled_templates_hotkeys": [
-    "Templates/Command_Update_XP.md"
+    "Templates/Startup_Auto_Daily_Log.md",
+    "Templates/Startup_Auto_XP.md",
+    "Templates/Startup_Auto_Weekly_Reset.md"
   ],
   "startup_templates": [
     "Templates/Startup_Auto_Daily_Log.md",
-    "Templates/Startup_Auto_XP.md"
+    "Templates/Startup_Auto_XP.md",
+    "Templates/Startup_Auto_Weekly_Reset.md"
   ],
   "intellisense_render": 1
 }
