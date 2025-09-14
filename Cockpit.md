@@ -33,6 +33,49 @@ if (!start || !end) {
 
   dv.el("pre", `==============================\n${status}\n${windowLine}\n${opsLine}\n==============================`);
 }
+# End of dataviewjs block
+```
+
+### Live Panels
+
+#### Open Today
+```dataview
+TABLE file.link AS "Open Today"
+FROM "Daily_Logs"
+WHERE date = date(today)
+LIMIT 1
+```
+
+#### Unchecked Tasks (last 7 days)
+```dataview
+TASK FROM "Daily_Logs"
+WHERE !completed AND file.day >= date(today) - dur(7 days)
+GROUP BY file.day
+SORT file.day DESC
+```
+
+#### Numbers Snapshot (this week totals)
+```dataview
+TABLE
+sum(nodes.academics) AS "A·nodes",
+sum(layers.academics) AS "A·layers",
+sum(connections.academics) AS "A·conn",
+sum(nodes.fitness) AS "F·nodes",
+sum(layers.fitness) AS "F·layers",
+sum(connections.fitness) AS "F·conn",
+sum(nodes.recovery) AS "R·nodes",
+sum(layers.recovery) AS "R·layers",
+sum(connections.recovery) AS "R·conn"
+FROM "Daily_Logs"
+WHERE file.day.weekyear = date(today).weekyear AND file.day.week = date(today).week
+```
+
+#### Continuity Check (this week)
+```dataview
+TABLE file.day AS Day, done.morning, done.midday, done.evening
+FROM "Daily_Logs"
+WHERE file.day >= date(today).startOfWeek() AND file.day <= date(today).endOfWeek()
+SORT file.day ASC
 ```
 # Operation Obsidian Cockpit
 
